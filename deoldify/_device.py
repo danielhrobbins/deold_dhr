@@ -13,12 +13,12 @@ class _Device:
 
     def is_gpu(self):
         ''' Returns `True` if the current device is GPU, `False` otherwise. '''
-        return self.current() is not DeviceID.CPU
+        return self.current() is not DeviceId.CPU
   
     def current(self):
         return self._current_device
 
-    def set(self, device:DeviceId):     
+    def set(self, device = DeviceId):
         if device == DeviceId.CPU:
             os.environ['CUDA_VISIBLE_DEVICES']=''
         else:

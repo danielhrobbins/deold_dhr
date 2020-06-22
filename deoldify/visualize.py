@@ -66,6 +66,7 @@ class ModelImageVisualizer:
         img = PIL.Image.open(BytesIO(response.content)).convert('RGB')
         return img
 
+
     def plot_transformed_image_from_url(
         self,
         url: str,
@@ -116,6 +117,36 @@ class ModelImageVisualizer:
         result_path = self._save_result_image(path, result)
         result.close()
         return result_path
+
+    def get_transformed_image_from_pil(
+        self, img, render_factor: int = None, post_process: bool = True,
+        watermarked: bool = True,
+    ) -> Image:
+        self._clean_mem()
+        orig_image = img
+        filtered_image = self.filter.filter(
+            orig_image, orig_image, render_factor=render_factor,
+            post_process=post_process
+        )
+
+        if watermarked:
+            return get_watermarked(filtered_image)
+
+        return filtered_image
+
+    def plot_transformed_image_from_pil(
+        self,
+        img,
+        render_factor: int = None,
+        post_process: bool = True,
+        watermarked: bool = True,
+    ):
+        result = self.get_transformed_image_from_pil(
+            img, render_factor, post_process=post_process,
+            watermarked=watermarked
+        )
+
+        return result
 
     def _plot_comparison(
         self,
