@@ -37,7 +37,7 @@ def predict(inp, colorizer):
     return result
 
 
-INPUTS = gradio.inputs.ImageIn(cast_to="pillow")
+INPUTS = gradio.inputs.Image(cast_to="pillow")
 OUTPUTS = gradio.outputs.Image()
 INTERFACE = gradio.Interface(fn=predict, inputs=INPUTS, outputs=OUTPUTS,
                              load_fn=load)
