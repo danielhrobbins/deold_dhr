@@ -37,7 +37,6 @@ def predict(inp):
 
 INPUTS = gradio.inputs.Image(cast_to="pillow")
 OUTPUTS = gradio.outputs.Image()
-INTERFACE = gradio.Interface(fn=predict, inputs=INPUTS, outputs=OUTPUTS,
-                             load_fn=load)
+INTERFACE = gradio.Interface(fn=predict, inputs=INPUTS, outputs=OUTPUTS)
 
 INTERFACE.launch(inbrowser=True, share=True)
