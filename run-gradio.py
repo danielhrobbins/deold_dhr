@@ -42,4 +42,4 @@ OUTPUTS = gradio.outputs.Image()
 INTERFACE = gradio.Interface(fn=predict, inputs=INPUTS, outputs=OUTPUTS,
                              load_fn=load)
 
-INTERFACE.launch(inbrowser=True)
+INTERFACE.launch(inbrowser=True, share=True)
