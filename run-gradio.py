@@ -28,6 +28,7 @@ colorizer = get_image_colorizer(artistic=True)
 
 
 def predict(inp):
+    inp = Image.fromarray(inp.astype('uint8'), 'RGB')
     render_factor = 35
     watermarked = False
     result = colorizer.plot_transformed_image_from_pil(inp,
@@ -35,7 +36,7 @@ def predict(inp):
     return result
 
 
-INPUTS = gradio.inputs.Image(cast_to="pillow")
+INPUTS = gradio.inputs.Image()
 OUTPUTS = gradio.outputs.Image()
 INTERFACE = gradio.Interface(fn=predict, inputs=INPUTS, outputs=OUTPUTS, title='De-Oldify', description='De-oldify colorizes old images. Try it out on an old image you want restored!', thumbnail='https://i2.wp.com/www.marktechpost.com/wp-content/uploads/2019/08/68747470733a2f2f692e696d6775722e636f6d2f427430766e6b652e6a7067.jpg?fit=1182%2C768&ssl=1')
 
