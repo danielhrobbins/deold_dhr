@@ -28,7 +28,7 @@ colorizer = get_image_colorizer(artistic=True)
 
 
 def predict(inp):
-    inp = Image.fromarray(inp.astype('uint8'), 'RGB')
+    inp = Image.fromarray(inp.astype('uint8'))
     render_factor = 35
     watermarked = False
     result = colorizer.plot_transformed_image_from_pil(inp,
