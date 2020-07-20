@@ -40,4 +40,4 @@ INPUTS = gradio.inputs.Image()
 OUTPUTS = gradio.outputs.Image()
 INTERFACE = gradio.Interface(fn=predict, inputs=INPUTS, outputs=OUTPUTS, title='De-Oldify', description='De-oldify colorizes old images. Try it out on an old image you want restored! Note: It will take some time to process the image.', thumbnail='https://i2.wp.com/www.marktechpost.com/wp-content/uploads/2019/08/68747470733a2f2f692e696d6775722e636f6d2f427430766e6b652e6a7067.jpg?fit=1182%2C768&ssl=1')
 
-INTERFACE.launch(inbrowser=True, share=True)
+INTERFACE.launch(inbrowser=True)
