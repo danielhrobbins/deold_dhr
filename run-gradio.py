@@ -43,7 +43,7 @@ examples = [
 ["examples/sinatra-jfk.jpg"],
 ["examples/payphone.png"]
 ]
-INTERFACE = gradio.Interface(fn=predict, inputs=INPUTS, outputs=OUTPUTS,
+INTERFACE = gradio.Interface(fn=predict, inputs=INPUTS, outputs=OUTPUTS, examples=examples,
                              title='De-Oldify', description='De-oldify '
                                                             'colorizes old '
                                                             'images. Try it '
