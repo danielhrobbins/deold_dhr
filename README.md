@@ -1,6 +1,9 @@
 
-# DeOldify (on Gradio!): 
+# DeOldify (on Gradio): 
 
+This repo contains code to launch a Gradio interface for DeOldify on [Gradio Hub](https://hub.gradio.app)
+
+Please see the **original repo**: [jantic/DeOldify](https://github.com/jantic/DeOldify)
 
 ![alt text](https://github.com/gradio-app/DeOldify/blob/master/screenshots/migrant-mother.png?raw=true)
 
