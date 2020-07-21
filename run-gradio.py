@@ -45,10 +45,10 @@ examples = [
 ]
 INTERFACE = gradio.Interface(fn=predict, inputs=INPUTS, outputs=OUTPUTS, examples=examples,
                              title='Colorize Photos (DeOldify)', description='DeOldify '
-                                                            'colorizes old '
-                                                            'images. Try it '
+                                                            'colorizes old black and white '
+                                                            'images and photos. Try it '
                                                             'out on an old '
                                                             'image you want '
-                                                            'restored! Note: It takes about 30s to process the image.', thumbnail='https://i2.wp.com/www.marktechpost.com/wp-content/uploads/2019/08/68747470733a2f2f692e696d6775722e636f6d2f427430766e6b652e6a7067.jpg?fit=1182%2C768&ssl=1')
+                                                            'restored! Note: It takes about 30-40s to process the image.', thumbnail='https://i2.wp.com/www.marktechpost.com/wp-content/uploads/2019/08/68747470733a2f2f692e696d6775722e636f6d2f427430766e6b652e6a7067.jpg?fit=1182%2C768&ssl=1')
 
 INTERFACE.launch(inbrowser=True)
