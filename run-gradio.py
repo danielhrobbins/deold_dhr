@@ -44,7 +44,7 @@ examples = [
 ["examples/payphone.png"]
 ]
 INTERFACE = gradio.Interface(fn=predict, inputs=INPUTS, outputs=OUTPUTS, examples=examples,
-                             title='De-Oldify', description='De-oldify '
+                             title='Colorize Photos (DeOldify)', description='DeOldify '
                                                             'colorizes old '
                                                             'images. Try it '
                                                             'out on an old '
