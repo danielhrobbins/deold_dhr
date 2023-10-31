@@ -91,7 +91,7 @@ class ModelImageVisualizer:
     def plot_transformed_image(
         self,
         path: str,
-        results_dir:Path = (./results_dir),
+        results_dir:Path = ('./results_dir'),
         figsize: Tuple[int, int] = (20, 20),
         render_factor: int = None,
         display_render_factor: bool = False,
