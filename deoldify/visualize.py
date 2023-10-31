@@ -114,7 +114,7 @@ class ModelImageVisualizer:
             self._plot_solo(figsize, render_factor, display_render_factor, result)
 
         orig.close()
-        result_path = self._save_result_image(path, result, results_dir = Path(./results_dir))
+        result_path = self._save_result_image(path, result, results_dir = Path('./results_dir'))
         result.close()
         return result_path
 
@@ -158,7 +158,7 @@ class ModelImageVisualizer:
             display_render_factor=display_render_factor,
         )
 
-    def _save_result_image(self, source_path: Path, image: Image, results_dir = Path(./results_dir) -> Path:
+    def _save_result_image(self, source_path: Path, image: Image, results_dir = Path('./results_dir') -> Path:
         if results_dir is None:
             results_dir = Path(self.results_dir)
         result_path = results_dir / source_path.name
@@ -499,7 +499,7 @@ def get_image_colorizer(
 def get_stable_image_colorizer(
     root_folder: Path = Path('./'),
     weights_name: str = 'ColorizeStable_gen',
-    results_dir = Path(./results_dir),
+    results_dir = Path('./results_dir'),
     render_factor: int = 75
 ) -> ModelImageVisualizer:
     learn = gen_inference_wide(root_folder=root_folder, weights_name=weights_name)
@@ -524,12 +524,12 @@ import shutil
 
 # Define image path and results directory path
 image_path = Path(./)
-results_dir = Path(./results_dir)
+results_dir = Path('./results_dir')
 
 # Display and save the image
 saved_image_path = show_image_in_notebook(image_path, results_dir)
 
-def show_image_in_notebook(image_path: Path, results_dir: = Path(./results_dir):
+def show_image_in_notebook(image_path: Path, results_dir: = Path('./results_dir'):
     ipythondisplay.display(ipythonimage(str(image_path)))
 
     # Save the image to results_dir if provided
