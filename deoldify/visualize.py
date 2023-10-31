@@ -165,20 +165,46 @@ class ModelImageVisualizer:
         image.save(result_path)
         return result_path
 
+#    def get_transformed_image(
+#        self, path: Path, render_factor: int = None, post_process: bool = True,
+#        watermarked: bool = True,
+#    ) -> Image:
+#        self._clean_mem()
+#        orig_image = self._open_pil_image(path)
+#        filtered_image = self.filter.filter(
+#            orig_image, orig_image, render_factor=render_factor,post_process=post_process
+#        )
+#
+#        if watermarked:
+#            return get_watermarked(filtered_image)
+#
+#        return filtered_image
+
+
     def get_transformed_image(
-        self, path: Path, render_factor: int = None, post_process: bool = True,
+        self, path: Path, save_dir: Path, render_factor: int = None, post_process: bool = True,
         watermarked: bool = True,
     ) -> Image:
         self._clean_mem()
         orig_image = self._open_pil_image(path)
         filtered_image = self.filter.filter(
-            orig_image, orig_image, render_factor=render_factor,post_process=post_process
+            orig_image, orig_image, render_factor=render_factor, post_process=post_process
         )
 
         if watermarked:
-            return get_watermarked(filtered_image)
+            transformed_image = get_watermarked(filtered_image)
+        else:
+            transformed_image = filtered_image
 
-        return filtered_image
+        # Generate a new filename for the transformed image
+        orig_filename = path.stem
+        new_filename = f"{orig_filename}_transformed{path.suffix}"
+        save_path = save_dir / new_filename
+
+        # Save the transformed image to the specified directory
+        transformed_image.save(save_path)
+
+        return transformed_image
 
     def _plot_image(
         self,
