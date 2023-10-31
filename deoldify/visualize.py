@@ -472,7 +472,8 @@ import shutil
 
 # Define image path and results directory path
 image_path = Path(./)
-results_dir = Path(./results_dir)
+results_dir = Path('result_images')
+
 
 # Display and save the image
 saved_image_path = show_image_in_notebook(image_path, results_dir)
