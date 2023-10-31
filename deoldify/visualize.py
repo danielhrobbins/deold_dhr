@@ -79,7 +79,7 @@ class ModelImageVisualizer:
         img.save(path)
         return self.plot_transformed_image(
             path=path,
-            results_dir=results_dir,
+            results_dir = Path(./results_dir),
             figsize=figsize,
             render_factor=render_factor,
             display_render_factor=display_render_factor,
@@ -114,7 +114,7 @@ class ModelImageVisualizer:
             self._plot_solo(figsize, render_factor, display_render_factor, result)
 
         orig.close()
-        result_path = self._save_result_image(path, result, results_dir=results_dir)
+        result_path = self._save_result_image(path, result, results_dir = Path(./results_dir))
         result.close()
         return result_path
 
@@ -158,7 +158,7 @@ class ModelImageVisualizer:
             display_render_factor=display_render_factor,
         )
 
-    def _save_result_image(self, source_path: Path, image: Image, results_dir = None) -> Path:
+    def _save_result_image(self, source_path: Path, image: Image, results_dir = Path(./results_dir) -> Path:
         if results_dir is None:
             results_dir = Path(self.results_dir)
         result_path = results_dir / source_path.name
@@ -499,12 +499,12 @@ def get_image_colorizer(
 def get_stable_image_colorizer(
     root_folder: Path = Path('./'),
     weights_name: str = 'ColorizeStable_gen',
-    results_dir='result_dir',
+    results_dir = Path(./results_dir),
     render_factor: int = 75
 ) -> ModelImageVisualizer:
     learn = gen_inference_wide(root_folder=root_folder, weights_name=weights_name)
     filtr = MasterFilter([ColorizerFilter(learn=learn)], render_factor=render_factor)
-    vis = ModelImageVisualizer(filtr, results_dir=results_dir)
+    vis = ModelImageVisualizer(filtr, results_dir = './results_dir')
     return vis
 
 
@@ -516,7 +516,7 @@ def get_artistic_image_colorizer(
 ) -> ModelImageVisualizer:
     learn = gen_inference_deep(root_folder=root_folder, weights_name=weights_name)
     filtr = MasterFilter([ColorizerFilter(learn=learn)], render_factor=render_factor)
-    vis = ModelImageVisualizer(filtr, results_dir=results_dir)
+    vis = ModelImageVisualizer(filtr, results_dir = './results_dir')
     return vis
 
 from pathlib import Path
