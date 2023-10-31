@@ -79,7 +79,7 @@ class ModelImageVisualizer:
         img.save(path)
         return self.plot_transformed_image(
             path=path,
-            results_dir = Path(./results_dir),
+            results_dir = Path('./results_dir'),
             figsize=figsize,
             render_factor=render_factor,
             display_render_factor=display_render_factor,
