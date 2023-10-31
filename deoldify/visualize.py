@@ -114,7 +114,7 @@ class ModelImageVisualizer:
             self._plot_solo(figsize, render_factor, display_render_factor, result)
 
         orig.close()
-        result_path = self._save_result_image(path, result, results_dir = Path('./results_dir'))
+        result_path = self._save_result_image(path, result, results_dir = Path('results_dir'))
         result.close()
         return result_path
 
