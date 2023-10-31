@@ -471,7 +471,7 @@ from pathlib import Path
 import shutil
 
 # Define image path and results directory path
-image_path = Path(./)
+image_path = Path('./')
 results_dir = Path('result_images')
 
 
