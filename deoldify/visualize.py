@@ -66,7 +66,7 @@ class ModelImageVisualizer:
         self,
         url: str,
         path: str = 'test_images/image01.png',
-        results_dir:Path = (./results_dir),
+        results_dir:Path = ('./results_dir'),
         figsize: Tuple[int, int] = (20, 20),
         render_factor: int = None,
         
