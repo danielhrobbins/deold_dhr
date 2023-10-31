@@ -65,8 +65,8 @@ class ModelImageVisualizer:
     def plot_transformed_image_from_url(
         self,
         url: str,
-        path: str = 'test_images/image01.png',
-        results_dir:Path = ('./results_dir'),
+        path: str = 'test_images/image.png',
+        results_dir:Path = None,
         figsize: Tuple[int, int] = (20, 20),
         render_factor: int = None,
         
@@ -79,7 +79,7 @@ class ModelImageVisualizer:
         img.save(path)
         return self.plot_transformed_image(
             path=path,
-            results_dir = Path('./results_dir'),
+            results_dir=results_dir,
             figsize=figsize,
             render_factor=render_factor,
             display_render_factor=display_render_factor,
@@ -91,7 +91,7 @@ class ModelImageVisualizer:
     def plot_transformed_image(
         self,
         path: str,
-        results_dir:Path = ('./results_dir'),
+        results_dir:Path = None,
         figsize: Tuple[int, int] = (20, 20),
         render_factor: int = None,
         display_render_factor: bool = False,
@@ -114,7 +114,7 @@ class ModelImageVisualizer:
             self._plot_solo(figsize, render_factor, display_render_factor, result)
 
         orig.close()
-        result_path = self._save_result_image(path, result, results_dir = Path('results_dir'))
+        result_path = self._save_result_image(path, result, results_dir=results_dir)
         result.close()
         return result_path
 
@@ -158,80 +158,28 @@ class ModelImageVisualizer:
             display_render_factor=display_render_factor,
         )
 
-    def _save_result_image(self, source_path: Path, image: Image, results_dir = 'results_dir') -> Path:
+    def _save_result_image(self, source_path: Path, image: Image, results_dir = result_images) -> Path:
         if results_dir is None:
             results_dir = Path(self.results_dir)
         result_path = results_dir / source_path.name
         image.save(result_path)
         return result_path
 
-#    def get_transformed_image(
-#        self, path: Path, render_factor: int = None, post_process: bool = True,
-#        watermarked: bool = True,
-#    ) -> Image:
-#        self._clean_mem()
-#        orig_image = self._open_pil_image(path)
-#        filtered_image = self.filter.filter(
-#            orig_image, orig_image, render_factor=render_factor,post_process=post_process
-#        )
-#
-#        if watermarked:
-#            return get_watermarked(filtered_image)
-#
-#        return filtered_image
-
-
-#    def get_transformed_image(
-#        self, path: Path, save_dir: Path, render_factor: int = None, post_process: bool = True,
-#        watermarked: bool = True,
-#    ) -> Image:
-#        self._clean_mem()
-#        orig_image = self._open_pil_image(path)
-#        filtered_image = self.filter.filter(
-#           orig_image, orig_image, render_factor=render_factor, post_process=post_process
-#        )
-#
-#        if watermarked:
-#            transformed_image = get_watermarked(filtered_image)
-#       else:
-#            transformed_image = filtered_image
-#
-#        # Generate a new filename for the transformed image
-#        orig_filename = path.stem
-#        new_filename = f"{orig_filename}_transformed{path.suffix}"
-#        save_path = save_dir / new_filename
-#
-#        # Save the transformed image to the specified directory
-#       transformed_image.save(save_path)
-#
-#        return transformed_image
-
-def get_transformed_image(
-        self, path: Path, save_dir: Path, render_factor: int = None, post_process: bool = True,
+    def get_transformed_image(
+        self, path: Path, render_factor: int = None, post_process: bool = True,
         watermarked: bool = True,
     ) -> Image:
         self._clean_mem()
         orig_image = self._open_pil_image(path)
         filtered_image = self.filter.filter(
-            orig_image, orig_image, render_factor=render_factor, post_process=post_process
+            orig_image, orig_image, render_factor=render_factor,post_process=post_process
         )
 
         if watermarked:
-            transformed_image = get_watermarked(filtered_image)
-        else:
-            transformed_image = filtered_image
+            return get_watermarked(filtered_image)
 
-        # Generate a new filename for the transformed image
-        orig_filename = path.stem
-        new_filename = f"{orig_filename}_transformed{path.suffix}"
-        save_path = save_dir / new_filename
+        return filtered_image
 
-        # Save the transformed image to the specified directory
-        transformed_image.save(save_path)
-
-        return transformed_image
-
-    
     def _plot_image(
         self,
         image: Image,
@@ -499,24 +447,24 @@ def get_image_colorizer(
 def get_stable_image_colorizer(
     root_folder: Path = Path('./'),
     weights_name: str = 'ColorizeStable_gen',
-    results_dir = Path('./results_dir'),
-    render_factor: int = 75
+    results_dir='result_images',
+    render_factor: int = 35
 ) -> ModelImageVisualizer:
     learn = gen_inference_wide(root_folder=root_folder, weights_name=weights_name)
     filtr = MasterFilter([ColorizerFilter(learn=learn)], render_factor=render_factor)
-    vis = ModelImageVisualizer(filtr, results_dir = './results_dir')
+    vis = ModelImageVisualizer(filtr, results_dir=results_dir)
     return vis
 
 
 def get_artistic_image_colorizer(
     root_folder: Path = Path('./'),
     weights_name: str = 'ColorizeArtistic_gen',
-    results_dir='./results_dir',
-    render_factor: int = 75
+    results_dir='result_images',
+    render_factor: int = 35
 ) -> ModelImageVisualizer:
     learn = gen_inference_deep(root_folder=root_folder, weights_name=weights_name)
     filtr = MasterFilter([ColorizerFilter(learn=learn)], render_factor=render_factor)
-    vis = ModelImageVisualizer(filtr, results_dir = './results_dir')
+    vis = ModelImageVisualizer(filtr, results_dir=results_dir)
     return vis
 
 from pathlib import Path
@@ -524,12 +472,12 @@ import shutil
 
 # Define image path and results directory path
 image_path = Path(./)
-results_dir = Path('./results_dir')
+results_dir = Path(./results_dir)
 
 # Display and save the image
 saved_image_path = show_image_in_notebook(image_path, results_dir)
 
-def show_image_in_notebook(image_path: Path, results_dir: = Path('./results_dir'):
+def show_image_in_notebook(image_path: Path, results_dir: Path = 'result_images'):
     ipythondisplay.display(ipythonimage(str(image_path)))
 
     # Save the image to results_dir if provided
