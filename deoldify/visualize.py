@@ -158,7 +158,7 @@ class ModelImageVisualizer:
             display_render_factor=display_render_factor,
         )
 
-    def _save_result_image(self, source_path: Path, image: Image, results_dir = result_images) -> Path:
+    def _save_result_image(self, source_path: Path, image: Image, results_dir = None) -> Path:
         if results_dir is None:
             results_dir = Path(self.results_dir)
         result_path = results_dir / source_path.name
@@ -467,31 +467,9 @@ def get_artistic_image_colorizer(
     vis = ModelImageVisualizer(filtr, results_dir=results_dir)
     return vis
 
-from pathlib import Path
-import shutil
 
-# Define image path and results directory path
-image_path = Path('./')
-results_dir = Path('result_images')
-
-
-# Display and save the image
-saved_image_path = show_image_in_notebook(image_path, results_dir)
-
-def show_image_in_notebook(image_path: Path, results_dir: Path = 'result_images'):
+def show_image_in_notebook(image_path: Path):
     ipythondisplay.display(ipythonimage(str(image_path)))
-
-    # Save the image to results_dir if provided
-    if results_dir is not None:
-        # Copy the image to the results directory
-        shutil.copy(image_path, results_dir / image_path.name)
-
-    # Optionally return the path to the saved image
-    if results_dir is not None:
-        return results_dir / image_path.name
-
-# def show_image_in_notebook(image_path: Path):
- #    ipythondisplay.display(ipythonimage(str(image_path)))
 
 
 def show_video_in_notebook(video_path: Path):
